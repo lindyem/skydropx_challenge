@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function MoviesList() {
+function ShowsList() {
   
   const [popular, setPopular] = useState([])
   const [top, setTop] = useState([])
@@ -46,4 +46,4 @@ function MoviesList() {
   )
 }
 
-export default MoviesList;
+export default ShowsList;

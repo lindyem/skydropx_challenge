@@ -1,9 +1,9 @@
-import MoviesList from "./components/MoviesList.jsx";
+import ShowsList from "./components/ShowsList.jsx";
 
 function App() {
   return (
     <div >
-      <MoviesList />
+      <ShowsList />
     </div>
   );
 }
