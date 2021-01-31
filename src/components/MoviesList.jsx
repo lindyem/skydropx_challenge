@@ -1,10 +1,9 @@
-import { useEffect, useState } from React;
-import axios from axios; 
+import { useEffect, useState } from 'react';
+import axios from 'axios'; 
 
 function MoviesList() {
   
    useEffect(() => {
-     axios.get
    }, [])
   return (
 
