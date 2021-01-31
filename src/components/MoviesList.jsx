@@ -10,7 +10,7 @@ function MoviesList() {
   useEffect(() => {
     axios.get('https://api.themoviedb.org/3/tv/popular?api_key=9187861de4b69a7a0899826a4bdf2f74')
       .then((response) => {
-        setPopular(response.data.resultswi);
+        setPopular(response.data.results);
       })
     
     axios.get('https://api.themoviedb.org/3/tv/top_rated?api_key=9187861de4b69a7a0899826a4bdf2f74')
