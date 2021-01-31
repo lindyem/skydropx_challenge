@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 import axios from 'axios';
-
-import item from './ShowsItem'
 import ShowsItem from './ShowsItem';
 
 function ShowsList() {
   const [popular, setPopular] = useState([])
   const [top, setTop] = useState([])
   const [onTheAir, setOnTheAir] = useState([])
+  
 
   useEffect(() => {
     axios.get('https://api.themoviedb.org/3/tv/popular?api_key=9187861de4b69a7a0899826a4bdf2f74')
@@ -32,9 +32,9 @@ function ShowsList() {
 
   }, [])
   
-
+  
   return (
-    <div style={{ display: 'flex' }}>
+    <section style={{ display: 'flex' }}>
       <div>
         {popular.map((element) => {
           return (
@@ -56,7 +56,7 @@ function ShowsList() {
           )
         }) }
       </div>
-    </div>
+    </section>
   )
 }
 
