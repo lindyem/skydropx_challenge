@@ -52,9 +52,11 @@ function ShowsItem({ item }) {
 
   return (
     <Fragment>
-    <div className="showCard" onClick={handleClick}>
-      <h3 className="title">{item.name}</h3>
-      <div className="average"> Rating: {item.vote_average }</div>
+      <div className="showCard" onClick={handleClick}>
+        <div className="showInfo">
+          <h3 className="title">{item.name}</h3>
+          <div className="average"> Rating: {item.vote_average }</div>
+        </div>
       <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
       </div>
       
@@ -63,7 +65,7 @@ function ShowsItem({ item }) {
       onRequestClose={closeModal}
       style={customStyles}
       contentLabel="Example Modal">
-      <div className="modalBackground">
+      <div>
         <h1 className="title">{item.name}</h1>
         <button className='btn' onClick={closeModal}>close</button>
 

@@ -48,13 +48,21 @@ function ShowsList() {
         }) }
       </div>
       <h1 className="headingCol">Trending Now <hr/></h1>
-       <div className="showRow">
+      <div className="showRow">
       {onTheAir.map((element) => {
           return (
             <ShowsItem item={element}/>
           )
         }) }
       </div>  
+      <h1 className="headingCol">Favorites <hr/></h1>
+      <div className="showRow">
+      {onTheAir.map((element) => {
+          return (
+            <ShowsItem item={element}/>
+          )
+        }) }
+      </div> 
     </section>
   )
 }

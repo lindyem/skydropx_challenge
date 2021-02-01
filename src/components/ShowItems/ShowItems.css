@@ -9,17 +9,19 @@
 }
 
 .title {
+  margin-bottom: 5px;
   color: white;
   font-weight: 800;
-  margin-bottom: 5px;
+}
+
+.showItems {
+  height: 5px;
 }
 
 
 img {
   margin-bottom: 20px;
 }
-
-
 
 
 
