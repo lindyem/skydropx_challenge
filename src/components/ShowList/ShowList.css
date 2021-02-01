@@ -1,10 +1,12 @@
 section{
-  color: #81b29a;
+  color: grey;
   cursor: pointer;
 }
 
 .headingCol{
+  margin-top: 10px;
   margin-bottom: 20px;
+  margin-left: 10px;
   font-size: 2rem;
   color:#eeeeee;
 }
@@ -13,5 +15,6 @@ section{
 .showRow{
   overflow-x: scroll;
   display: flex;
+  padding: 20px;
 }
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ShowsItem from '../ShowItems';
 
-import main from './main.css';
+import  './ShowList.css';
 
 function ShowsList() {
   const [popular, setPopular] = useState([])
@@ -30,7 +30,7 @@ function ShowsList() {
   
   return (
     <section>
-      <h1 className="headingCol">Popular</h1>
+      <h1 className="headingCol">Popular <hr/></h1>
       <div className="showRow">
       {popular.map((element) => {
           return (
@@ -39,7 +39,7 @@ function ShowsList() {
         }) } 
       </div>
 
-      <h1 className="headingCol">Top Rated</h1>
+      <h1 className="headingCol">Top Rated <hr/></h1>
       <div className="showRow">
       {top.map((element) => {
           return (
@@ -47,7 +47,7 @@ function ShowsList() {
           )
         }) }
       </div>
-      <h1 className="headingCol">Trending Now</h1>
+      <h1 className="headingCol">Trending Now <hr/></h1>
        <div className="showRow">
       {onTheAir.map((element) => {
           return (

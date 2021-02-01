@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from "axios";
 
-import main from './main.css';
+import './ShowItems.css';
 
 const customStyles = {
   content : {

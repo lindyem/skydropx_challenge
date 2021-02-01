@@ -1,7 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 *{
-  margin: 10px;
+  margin: 0;
+}
+
+header{
+  width: 100%;
+  background: #222;
+  color: white;
+  height: 40px;
+  padding-top: 10px;
+  font-weight: 700;
+  font-size: 1.5em;
 }
 
 body {
@@ -12,3 +22,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+hr {
+  margin-top: 5px;
+  border-color:#222;
+}
