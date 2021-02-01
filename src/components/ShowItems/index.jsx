@@ -12,7 +12,10 @@ const customStyles = {
     right                 : 'auto',
     bottom                : 'auto',
     marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    transform             : 'translate(-50%, -50%)',
+    background            : 'rgba(255,255,255, 0.8)',
+    width                 : "500px",
+    borderRadius          : '25px'
   }
 };
 
@@ -49,22 +52,23 @@ function ShowsItem({ item }) {
 
   return (
     <Fragment>
-    <div onClick={handleClick}>
-      <h3>{item.name}</h3>
+    <div className="showCard" onClick={handleClick}>
+      <h3 className="title">{item.name}</h3>
       <div className="average"> Rating: {item.vote_average }</div>
       <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
-        </div>
+      </div>
+      
       <Modal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       style={customStyles}
       contentLabel="Example Modal">
+      <div className="modalBackground">
+        <h1 className="title">{item.name}</h1>
+        <button className='btn' onClick={closeModal}>close</button>
 
-      <h1>{item.name}</h1>
-      <button className='btn' onClick={closeModal}>close</button>
-
-      <div className="average">Rating: {item.vote_average}</div>
-      <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
+        <div className="average">Rating: {item.vote_average}</div>
+        <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
         <div>
           <p>{details?.overview}</p>
           <div>
@@ -72,6 +76,7 @@ function ShowsItem({ item }) {
             return <div>{genre.name}</div>
           })}
           Run Time: {details?.episode_run_time && details.episode_run_time[0]}
+            </div>    
           </div>
         </div>
       </Modal>

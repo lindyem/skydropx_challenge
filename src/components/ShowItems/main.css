@@ -1,16 +1,35 @@
-*{
-  margin: 0 auto;
+.showCard{
   text-align: center;
+  margin: 0 35px;
+  padding: 20px;
+  border: 1px #121212 solid;
+  border-radius: 20px;
+  background: rgba(197, 157, 157, 0.1);
+  box-shadow: 10px 10px 8px #444141;
 }
 
-h1 {
-  margin: 20px 0;
-  text-align: center;
+.title {
+  color: white;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
 
+
+img {
+  margin-bottom: 20px;
+}
+
+
+
+
+
+/* Modal Styles */
+
+.average {
+  font-weight: 500;
 }
 
 .btn {
   margin: 0 auto;
   display: block;
 }
-

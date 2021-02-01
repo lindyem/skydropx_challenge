@@ -30,30 +30,31 @@ function ShowsList() {
   
   return (
     <section>
-      <div>
-        <h1 className="headingCol">Popular</h1>
-        {popular.map((element) => {
+      <h1 className="headingCol">Popular</h1>
+      <div className="showRow">
+      {popular.map((element) => {
           return (
             <ShowsItem item={element}/>
           )
         }) } 
       </div>
-      <div>
+
       <h1 className="headingCol">Top Rated</h1>
+      <div className="showRow">
       {top.map((element) => {
           return (
             <ShowsItem item={element}/>
           )
         }) }
       </div>
-      <div>
-      <h1 className="headingCol">Most Watched Now!</h1>
+      <h1 className="headingCol">Trending Now</h1>
+       <div className="showRow">
       {onTheAir.map((element) => {
           return (
             <ShowsItem item={element}/>
           )
         }) }
-      </div>
+      </div>  
     </section>
   )
 }

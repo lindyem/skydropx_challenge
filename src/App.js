@@ -11,7 +11,7 @@ function App() {
   return (
     <Fragment>
       <header>
-        <h1>Shows!</h1>
+        {/* <h1>Shows!</h1> */}
       </header>
       <main>
         <Router>
