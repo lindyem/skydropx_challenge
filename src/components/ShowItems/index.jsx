@@ -50,10 +50,10 @@ function ShowsItem({ item }) {
   return (
     <Fragment>
     <div onClick={handleClick}>
-      <h1>{item.name}</h1>
+      <h3>{item.name}</h3>
       <div className="average"> Rating: {item.vote_average }</div>
       <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
-    </div>
+        </div>
       <Modal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}

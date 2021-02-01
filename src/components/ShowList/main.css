@@ -1,0 +1,19 @@
+*{
+  background-color: #f4f1de;
+}
+section{
+  display: flex;
+  flex-wrap: wrap;
+  color: #81b29a;
+  cursor: pointer;
+}
+
+.headingCol{
+  margin: 20px 0;
+  color:#3d405b;
+  text-decoration: underline;
+}
+
+.showsInfo {
+
+}

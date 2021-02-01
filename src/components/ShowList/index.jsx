@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ShowsItem from '../ShowItems';
 
+import main from './main.css';
+
 function ShowsList() {
   const [popular, setPopular] = useState([])
   const [top, setTop] = useState([])
@@ -23,16 +25,13 @@ function ShowsList() {
       .then((response) => {
         setOnTheAir(response.data.results);
     })
-
-    
-
   }, [])
   
   
   return (
-    <section style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <section>
       <div>
-        <h1>Popular</h1>
+        <h1 className="headingCol">Popular</h1>
         {popular.map((element) => {
           return (
             <ShowsItem item={element}/>
@@ -40,7 +39,7 @@ function ShowsList() {
         }) } 
       </div>
       <div>
-      <h1>Top Rated</h1>
+      <h1 className="headingCol">Top Rated</h1>
       {top.map((element) => {
           return (
             <ShowsItem item={element}/>
@@ -48,7 +47,7 @@ function ShowsList() {
         }) }
       </div>
       <div>
-      <h1>Most Watched Now!</h1>
+      <h1 className="headingCol">Most Watched Now!</h1>
       {onTheAir.map((element) => {
           return (
             <ShowsItem item={element}/>
