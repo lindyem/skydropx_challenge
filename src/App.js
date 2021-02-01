@@ -1,5 +1,5 @@
 import {Fragment} from "react"
-import ShowsList from "./components/ShowsList.jsx";
+import ShowsList from "./components/ShowList/index.jsx";
 import {
   BrowserRouter as Router,
   Switch,

@@ -3,6 +3,8 @@ import { Fragment, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from "axios";
 
+import main from './main.css';
+
 const customStyles = {
   content : {
     top                   : '50%',
@@ -48,27 +50,29 @@ function ShowsItem({ item }) {
   return (
     <Fragment>
     <div onClick={handleClick}>
-      {item.name}
-      <div>{ item.vote_average }</div>
-      <div><img height="100px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
+      <h1>{item.name}</h1>
+      <div className="average"> Rating: {item.vote_average }</div>
+      <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
     </div>
-    <Modal
-    isOpen={modalIsOpen}
-    onRequestClose={closeModal}
-    style={customStyles}
-    contentLabel="Example Modal">
+      <Modal
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
+      style={customStyles}
+      contentLabel="Example Modal">
 
-    <h2>Hello</h2>
-    <button onClick={closeModal}>close</button>
-    {item.name}
-      <div>{ item.vote_average }</div>
-      <div><img height="100px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
+      <h1>{item.name}</h1>
+      <button className='btn' onClick={closeModal}>close</button>
+
+      <div className="average">Rating: {item.vote_average}</div>
+      <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
         <div>
-          {details?.overview}
+          <p>{details?.overview}</p>
+          <div>
           Genre: {details?.genres?.map((genre) => {
             return <div>{genre.name}</div>
           })}
-         Run Time: {details?.episode_run_time && details.episode_run_time[0]}
+          Run Time: {details?.episode_run_time && details.episode_run_time[0]}
+          </div>
         </div>
       </Modal>
     </Fragment>

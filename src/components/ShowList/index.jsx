@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import ShowsItem from './ShowsItem';
+import ShowsItem from '../ShowItems';
 
 function ShowsList() {
   const [popular, setPopular] = useState([])
@@ -30,8 +30,9 @@ function ShowsList() {
   
   
   return (
-    <section style={{ display: 'flex' }}>
+    <section style={{ display: 'flex', flexWrap: 'wrap' }}>
       <div>
+        <h1>Popular</h1>
         {popular.map((element) => {
           return (
             <ShowsItem item={element}/>
@@ -39,6 +40,7 @@ function ShowsList() {
         }) } 
       </div>
       <div>
+      <h1>Top Rated</h1>
       {top.map((element) => {
           return (
             <ShowsItem item={element}/>
@@ -46,6 +48,7 @@ function ShowsList() {
         }) }
       </div>
       <div>
+      <h1>Most Watched Now!</h1>
       {onTheAir.map((element) => {
           return (
             <ShowsItem item={element}/>
