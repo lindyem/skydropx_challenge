@@ -11,7 +11,7 @@ function App() {
   return (
     <Fragment>
       <header>
-        TV's Most Popular Shows! 
+        TV Show Database! 
       </header>
       <main>
         <Router>
