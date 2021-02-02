@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import ShowsItem from '../ShowItems';
+import ShowsItem from '../ShowItem';
 
 import  './ShowList.css';
 

@@ -2,8 +2,9 @@ import { useHistory, useParams } from "react-router-dom";
 import { Fragment, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from "axios";
+import FavoriteHeart from "../FavoriteHeart";
+import './ShowItem.css';
 
-import './ShowItems.css';
 
 const customStyles = {
   content : {
@@ -23,10 +24,24 @@ Modal.setAppElement('#root')
 
 function ShowsItem({ item }) {
   const [details, setDetails] = useState({});
+  const [isFavorite, setIsFavorite] = useState(false);
   let history = useHistory();
   let { id } = useParams();
+  const [modalIsOpen, setIsOpen] = useState(false);
+  
+  useEffect(() => {
+    setIsFavorite(getIsFavorite())
+  }, [])
 
-  const [modalIsOpen,setIsOpen] = useState(false);
+  useEffect(() => {
+    if (+id === item.id) {
+      axios.get(`https://api.themoviedb.org/3/tv/${item.id}?api_key=9187861de4b69a7a0899826a4bdf2f74`)
+      .then((response) => {
+        setDetails(response.data)
+      })
+    }
+  }, [id])
+
   function openModal() {
     setIsOpen(true);
   }
@@ -39,25 +54,29 @@ function ShowsItem({ item }) {
     openModal();
   }
 
-  useEffect(() => {
-    if (+id === item.id) {
-      axios.get(`https://api.themoviedb.org/3/tv/${item.id}?api_key=9187861de4b69a7a0899826a4bdf2f74`)
-      .then((response) => {
-        setDetails(response.data)
-      })
+  const handleFavorite = () => {
+    if (isFavorite) {
+      localStorage.removeItem(item.id);
+      setIsFavorite(false);
+    } else {
+      localStorage.setItem(item.id, true);
+      setIsFavorite(true);
     }
-  }, [id])
+  }
 
-
+  const getIsFavorite = () => {
+    return !!localStorage.getItem(item.id)
+  }
 
   return (
     <Fragment>
       <div className="showCard" onClick={handleClick}>
-        <div className="showInfo">
+        <div className="showHeader">
           <h3 className="title">{item.name}</h3>
-          <div className="average"> Rating: {item.vote_average }</div>
+          <FavoriteHeart isFavorite={isFavorite} onFavorite={handleFavorite}/>
         </div>
-      <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
+        <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
+        <div className="average"> Rating: {item.vote_average }</div>
       </div>
       
       <Modal
@@ -65,10 +84,9 @@ function ShowsItem({ item }) {
       onRequestClose={closeModal}
       style={customStyles}
       contentLabel="Example Modal">
-      <div>
+        <div>
+        <button className='btn' onClick={closeModal}>X</button>
         <h1 className="title">{item.name}</h1>
-        <button className='btn' onClick={closeModal}>close</button>
-
         <div className="average">Rating: {item.vote_average}</div>
         <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
         <div>
