@@ -23,20 +23,41 @@
   justify-content: space-between;
 }
 
-
 img {
   margin-bottom: 20px;
 }
 
-
-
 /* Modal Styles */
 
-.average {
-  font-weight: 500;
+.modalContent {
+  text-align: center;
+  line-height: 1.5;
 }
 
 .btn {
   margin-left: auto;
   display: block;
+  border: none;
+  font-weight: 300;
+  font-family: Arial, sans-serif;
+}
+
+
+.titleModal {
+  color: #121212;
+}
+
+.favoriteHeartModal{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+}
+.overviewModal {
+  margin-bottom: 20px;
+}
+
+.showInfo {
+  display: flex;
+  justify-content: space-evenly;
 }
