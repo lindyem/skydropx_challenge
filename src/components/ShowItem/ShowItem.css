@@ -32,6 +32,8 @@ img {
 .modalContent {
   text-align: center;
   line-height: 1.5;
+  overflow-y: scroll;
+  max-height: 90vh;
 }
 
 .btn {

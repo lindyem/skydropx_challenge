@@ -14,8 +14,8 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
+    maxWidth              : '60vw',
     background            : 'rgba(255,255,255, 0.8)',
-    width                 : "500px",
     borderRadius          : '25px'
   }
 };
@@ -89,7 +89,7 @@ function ShowsItem({ item }) {
           <h1 className="titleModal">{item.name}</h1>
           <div className="averageModal">Rating: {item.vote_average}</div>
           <div className="favoriteHeartModal"><FavoriteHeart isFavorite={isFavorite} onFavorite={handleFavorite}/></div>
-        <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
+          <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
         <div>
           <p className="overviewModal">{details?.overview}</p>
             <div className="showInfo">
