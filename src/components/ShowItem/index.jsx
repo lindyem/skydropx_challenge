@@ -22,16 +22,12 @@ const customStyles = {
 
 Modal.setAppElement('#root')
 
-function ShowsItem({ item }) {
+function ShowsItem({ item, onFavorite, favoriteIds }) {
   const [details, setDetails] = useState({});
-  const [isFavorite, setIsFavorite] = useState(false);
   let history = useHistory();
   let { id } = useParams();
   const [modalIsOpen, setIsOpen] = useState(false);
   
-  useEffect(() => {
-    setIsFavorite(getIsFavorite())
-  }, [])
 
   useEffect(() => {
     if (+id === item.id) {
@@ -55,25 +51,22 @@ function ShowsItem({ item }) {
   }
 
   const handleFavorite = () => {
-    if (isFavorite) {
+    if (favoriteIds.includes(item.id)) {
       localStorage.removeItem(item.id);
-      setIsFavorite(false);
     } else {
       localStorage.setItem(item.id, true);
-      setIsFavorite(true);
     }
+
+    onFavorite();
   }
 
-  const getIsFavorite = () => {
-    return !!localStorage.getItem(item.id)
-  }
 
   return (
     <Fragment>
       <div className="showCard" onClick={handleClick}>
         <div className="showHeader">
           <h3 className="title">{item.name}</h3>
-          <FavoriteHeart isFavorite={isFavorite} onFavorite={handleFavorite}/>
+          <FavoriteHeart isFavorite={favoriteIds.includes(item.id)} onFavorite={handleFavorite}/>
         </div>
         <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
         <div className="average"> Rating: {item.vote_average }</div>
@@ -88,7 +81,7 @@ function ShowsItem({ item }) {
         <button className='btn' onClick={closeModal}>X</button>
           <h1 className="titleModal">{item.name}</h1>
           <div className="averageModal">Rating: {item.vote_average}</div>
-          <div className="favoriteHeartModal"><FavoriteHeart isFavorite={isFavorite} onFavorite={handleFavorite}/></div>
+          <div className="favoriteHeartModal"><FavoriteHeart isFavorite={favoriteIds.includes(item.id)} onFavorite={handleFavorite}/></div>
           <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
         <div>
           <p className="overviewModal">{details?.overview}</p>
