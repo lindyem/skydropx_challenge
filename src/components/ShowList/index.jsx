@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import ShowsItem from '../ShowItem';
+import { connect } from 'react-redux';
+import ShowItem from '../ShowItem';
 import FilterSelect from '../FilterSelect';
+
+import { setPopularShowsAction, setTopShowsAction, setOnTheAirShowsAction, setFavoriteShowsAction } from '../../actions/showActions';
 
 import  './ShowList.css';
 
-function ShowsList() {
-  const [popular, setPopular] = useState([])
-  const [top, setTop] = useState([])
-  const [onTheAir, setOnTheAir] = useState([])
-  const [favorites, setFavorites] = useState([])
-  
-
+function ShowsList({popularShows, topShows, onTheAirShows, favoriteShows, setPopularShows, setTopShows, setOnTheAirShows, setFavoriteShows}) {
   useEffect(() => {
     const popularApi = axios.get('https://api.themoviedb.org/3/tv/popular?api_key=9187861de4b69a7a0899826a4bdf2f74');
     const topApi = axios.get('https://api.themoviedb.org/3/tv/top_rated?api_key=9187861de4b69a7a0899826a4bdf2f74');
@@ -23,57 +20,57 @@ function ShowsList() {
       const topData = responses[1].data.results
       const onTheAirData = responses[2].data.results
 
-      setPopular(popularData);
-      setTop(topData);
-      setOnTheAir(onTheAirData);
+      setPopularShows(popularData);
+      setTopShows(topData);
+      setOnTheAirShows(onTheAirData);
 
       const favoriteIds = { ...localStorage };
-        const favoriteShows = []
-        for (let id in favoriteIds) {
-          if (popularData.filter((show) => show.id === +id).length > 0 && !favoriteShows.filter((show) => show.id === +id).length > 0) {
-            favoriteShows.push(popularData.find((show) => show.id === +id))
-          } else if (topData.filter((show) => show.id === +id).length > 0 && !favoriteShows.filter((show) => show.id === +id).length > 0) {
-            favoriteShows.push(topData.find((show) => show.id === +id))
-          } else if (onTheAirData.filter((show) => show.id === +id).length > 0 && !favoriteShows.filter((show) => show.id === +id).length > 0) {
-            favoriteShows.push(onTheAirData.find((show) => show.id === +id))
-          }
+      const favoriteShows = []
+      for (let id in favoriteIds) {
+        if (popularData.filter((show) => show.id === +id).length > 0 && !favoriteShows.filter((show) => show.id === +id).length > 0) {
+          favoriteShows.push(popularData.find((show) => show.id === +id))
+        } else if (topData.filter((show) => show.id === +id).length > 0 && !favoriteShows.filter((show) => show.id === +id).length > 0) {
+          favoriteShows.push(topData.find((show) => show.id === +id))
+        } else if (onTheAirData.filter((show) => show.id === +id).length > 0 && !favoriteShows.filter((show) => show.id === +id).length > 0) {
+          favoriteShows.push(onTheAirData.find((show) => show.id === +id))
         }
-        setFavorites(favoriteShows);
+      }
+      setFavoriteShows(favoriteShows);
     }))
   }, [])
 
   const handleOnFilter = (filterValue, name) => {
     if (name === 'popular') {
       if (filterValue === 'alphabet') {
-        let filteredArray = [...popular].sort((a, b) => (a.name > b.name) ? 1 : -1);
-        setPopular(filteredArray)
+        let filteredArray = [...popularShows].sort((a, b) => (a.name > b.name) ? 1 : -1);
+        setPopularShows(filteredArray)
       } else {
-        let filteredArray = [...popular].sort((a, b) => (a.vote_average < b.vote_average) ? 1 : -1);
-        setPopular(filteredArray)
+        let filteredArray = [...popularShows].sort((a, b) => (a.vote_average < b.vote_average) ? 1 : -1);
+        setPopularShows(filteredArray)
       }
     } else if (name === 'top') {
       if (filterValue === 'alphabet') {
-        let filteredArray = [...top].sort((a, b) => (a.name > b.name) ? 1 : -1);
-        setTop(filteredArray)
+        let filteredArray = [...topShows].sort((a, b) => (a.name > b.name) ? 1 : -1);
+        setTopShows(filteredArray)
       } else {
-        let filteredArray = [...top].sort((a, b) => (a.vote_average < b.vote_average) ? 1 : -1);
-        setTop(filteredArray)
+        let filteredArray = [...topShows].sort((a, b) => (a.vote_average < b.vote_average) ? 1 : -1);
+        setTopShows(filteredArray)
       }
     } else if (name === 'onTheAir') {
       if (filterValue === 'alphabet') {
-        let filteredArray = [...onTheAir].sort((a, b) => (a.name > b.name) ? 1 : -1);
-        setOnTheAir(filteredArray)
+        let filteredArray = [...onTheAirShows].sort((a, b) => (a.name > b.name) ? 1 : -1);
+        setOnTheAirShows(filteredArray)
       } else {
-        let filteredArray = [...onTheAir].sort((a, b) => (a.vote_average < b.vote_average) ? 1 : -1);
-        setOnTheAir(filteredArray)
+        let filteredArray = [...onTheAirShows].sort((a, b) => (a.vote_average < b.vote_average) ? 1 : -1);
+        setOnTheAirShows(filteredArray)
       }
     } else if (name === 'favorite') {
       if (filterValue === 'alphabet') {
-        let filteredArray = [...favorites].sort((a, b) => (a.name > b.name) ? 1 : -1);
-        setFavorites(filteredArray)
+        let filteredArray = [...favoriteShows].sort((a, b) => (a.name > b.name) ? 1 : -1);
+        setFavoriteShows(filteredArray)
       } else {
-        let filteredArray = [...favorites].sort((a, b) => (a.vote_average < b.vote_average) ? 1 : -1);
-        setFavorites(filteredArray)
+        let filteredArray = [...favoriteShows].sort((a, b) => (a.vote_average < b.vote_average) ? 1 : -1);
+        setFavoriteShows(filteredArray)
       }
     }
   }
@@ -82,50 +79,48 @@ function ShowsList() {
     const favoriteIds = { ...localStorage };
     const favoriteShows = []
     for (let id in favoriteIds) {
-      if (popular.filter((show) => show.id === +id).length > 0 && !favoriteShows.filter((show) => show.id === +id).length > 0) {
-        favoriteShows.push(popular.find((show) => show.id === +id))
-      } else if (top.filter((show) => show.id === +id).length > 0 && !favoriteShows.filter((show) => show.id === +id).length > 0) {
-        favoriteShows.push(top.find((show) => show.id === +id))
-      } else if (onTheAir.filter((show) => show.id === +id).length > 0 && !favoriteShows.filter((show) => show.id === +id).length > 0) {
-        favoriteShows.push(onTheAir.find((show) => show.id === +id))
+      if (popularShows.filter((show) => show.id === +id).length > 0 && !favoriteShows.filter((show) => show.id === +id).length > 0) {
+        favoriteShows.push(popularShows.find((show) => show.id === +id))
+      } else if (topShows.filter((show) => show.id === +id).length > 0 && !favoriteShows.filter((show) => show.id === +id).length > 0) {
+        favoriteShows.push(topShows.find((show) => show.id === +id))
+      } else if (onTheAirShows.filter((show) => show.id === +id).length > 0 && !favoriteShows.filter((show) => show.id === +id).length > 0) {
+        favoriteShows.push(onTheAirShows.find((show) => show.id === +id))
       }
     }
-    setFavorites(favoriteShows);
+    setFavoriteShows(favoriteShows);
   }
-
-
   return (
     <section>
       <h1 className="headingCol">Popular <FilterSelect name="popular" onFilter={handleOnFilter}/><hr/></h1>
       <div className="showRow">
-        {popular.map((element) => {
+        {popularShows.map((element) => {
           return (
-            <ShowsItem key={`popular-${element.id}`} item={element} onFavorite={handleFavorite} favoriteIds={favorites.map(x => x.id)}/>
+            <ShowItem key={`popular-${element.id}`} item={element} onFavorite={handleFavorite} favoriteIds={favoriteShows.map(x => x.id)}/>
           )
         }) } 
       </div>
 
       <h1 className="headingCol">Top Rated <FilterSelect name="top" onFilter={handleOnFilter}/> <hr/></h1>
       <div className="showRow">
-        {top.map((element) => {
+        {topShows.map((element) => {
           return (
-            <ShowsItem key={`top-${element.id}`}  item={element} onFavorite={handleFavorite} favoriteIds={favorites.map(x => x.id)}/>
+            <ShowItem key={`top-${element.id}`}  item={element} onFavorite={handleFavorite} favoriteIds={favoriteShows.map(x => x.id)}/>
           )
         }) }
       </div>
       <h1 className="headingCol">Trending Now <FilterSelect name="onTheAir" onFilter={handleOnFilter}/><hr/></h1>
       <div className="showRow">
-        {onTheAir.map((element) => {
+        {onTheAirShows.map((element) => {
           return (
-            <ShowsItem key={`onTheAir-${element.id}`}  item={element} onFavorite={handleFavorite} favoriteIds={favorites.map(x => x.id)}/>
+            <ShowItem key={`onTheAir-${element.id}`}  item={element} onFavorite={handleFavorite} favoriteIds={favoriteShows.map(x => x.id)}/>
           )
         }) }
       </div>  
       <h1 className="headingCol">Favorites <FilterSelect name="favorite" onFilter={handleOnFilter}/> <hr/></h1>
       <div className="showRow">
-        {favorites.map((element) => {
+        {favoriteShows.map((element) => {
           return (
-            <ShowsItem key={`favorites-${element.id}`} item={element} onFavorite={handleFavorite} favoriteIds={favorites.map(x => x.id)}/>
+            <ShowItem key={`favorites-${element.id}`} item={element} onFavorite={handleFavorite} favoriteIds={favoriteShows.map(x => x.id)}/>
           )
         }) }
       </div> 
@@ -133,4 +128,24 @@ function ShowsList() {
   )
 }
 
-export default ShowsList;
+const mapStateToProps = state => {
+  return {
+    popularShows: state.shows.popularShows,
+    topShows: state.shows.topShows,
+    onTheAirShows: state.shows.onTheAirShows,
+    favoriteShows: state.shows.favoriteShows,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  setPopularShows: (shows) => dispatch(setPopularShowsAction(shows)),
+  setTopShows: (shows) => dispatch(setTopShowsAction(shows)),
+  setOnTheAirShows: (shows) => dispatch(setOnTheAirShowsAction(shows)),
+  setFavoriteShows: (shows) => dispatch(setFavoriteShowsAction(shows)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShowsList);
+

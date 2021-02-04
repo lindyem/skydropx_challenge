@@ -51,7 +51,7 @@ function ShowsItem({ item, onFavorite, favoriteIds }) {
   }
 
   const handleFavorite = () => {
-    if (favoriteIds.includes(item.id)) {
+    if (favoriteIds?.includes(item.id)) {
       localStorage.removeItem(item.id);
     } else {
       localStorage.setItem(item.id, true);
@@ -66,7 +66,7 @@ function ShowsItem({ item, onFavorite, favoriteIds }) {
       <div className="showCard" onClick={handleClick}>
         <div className="showHeader">
           <h3 className="title">{item.name}</h3>
-          <FavoriteHeart isFavorite={favoriteIds.includes(item.id)} onFavorite={handleFavorite}/>
+          <FavoriteHeart isFavorite={favoriteIds?.includes(item.id)} onFavorite={handleFavorite}/>
         </div>
         <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
         <div className="average"> Rating: {item.vote_average }</div>
@@ -81,7 +81,7 @@ function ShowsItem({ item, onFavorite, favoriteIds }) {
         <button className='btn' onClick={closeModal}>X</button>
           <h1 className="titleModal">{item.name}</h1>
           <div className="averageModal">Rating: {item.vote_average}</div>
-          <div className="favoriteHeartModal"><FavoriteHeart isFavorite={favoriteIds.includes(item.id)} onFavorite={handleFavorite}/></div>
+          <div className="favoriteHeartModal"><FavoriteHeart isFavorite={favoriteIds?.includes(item.id)} onFavorite={handleFavorite}/></div>
           <div><img height="250px" src={`https://image.tmdb.org/t/p/w500/${item.poster_path}?api_key=9187861de4b69a7a0899826a4bdf2f74`} alt="" /></div>
         <div>
           <p className="overviewModal">{details?.overview}</p>
