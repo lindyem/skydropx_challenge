@@ -20,6 +20,17 @@ section{
   scroll-behavior: smooth;
 }
 
+/* Hide scrollbar for Chrome/Safari */
+.showRow::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.showRow {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .arrow-right,
 .arrow-left{
   display: block;
