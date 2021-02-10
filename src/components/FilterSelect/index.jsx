@@ -7,8 +7,8 @@ function FilterSelect({ onFilter, name }) {
   }
 
   return (
-    <div className='custom-select'>
-      <select name="select" onChange={handleFilter}>
+    <div>
+      <select className='selectCss' name="select" onChange={handleFilter}>
         <option value="" disabled selected>Sort By</option>
         <option value="alphabet">A-Z</option>
         <option value="rating">Rating</option>
