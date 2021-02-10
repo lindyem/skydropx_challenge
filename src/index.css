@@ -12,6 +12,11 @@ header{
   padding-top: 10px;
   font-weight: 700;
   font-size: 1.5em;
+
+}
+
+.title {
+  margin-left: 10px;
 }
 
 body {

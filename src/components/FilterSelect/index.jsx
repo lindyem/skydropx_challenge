@@ -1,3 +1,5 @@
+import './FilterSelect.css'
+
 function FilterSelect({ onFilter, name }) {
   
   const handleFilter = (e) => {
@@ -5,7 +7,7 @@ function FilterSelect({ onFilter, name }) {
   }
 
   return (
-    <div>
+    <div className='custom-select'>
       <select name="select" onChange={handleFilter}>
         <option value="" disabled selected>Sort By</option>
         <option value="alphabet">A-Z</option>

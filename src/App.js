@@ -11,7 +11,7 @@ function App() {
   return (
     <Fragment>
       <header>
-        TV Show Database! 
+        <h3 className="title">TV Show Database! </h3>
       </header>
       <main>
         <Router>
