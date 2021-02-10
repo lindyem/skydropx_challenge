@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import ShowItem from '../ShowItem';
@@ -9,6 +9,13 @@ import { setPopularShowsAction, setTopShowsAction, setOnTheAirShowsAction, setFa
 import  './ShowList.css';
 
 function ShowsList({popularShows, topShows, onTheAirShows, favoriteShows, setPopularShows, setTopShows, setOnTheAirShows, setFavoriteShows}) {
+  const popularListRef = useRef();
+  const topListRef = useRef();
+  const onTheAirListRef = useRef();
+  const favoriteListRef = useRef();
+
+  let scrollInterval;
+
   useEffect(() => {
     const popularApi = axios.get('https://api.themoviedb.org/3/tv/popular?api_key=9187861de4b69a7a0899826a4bdf2f74');
     const topApi = axios.get('https://api.themoviedb.org/3/tv/top_rated?api_key=9187861de4b69a7a0899826a4bdf2f74');
@@ -89,40 +96,65 @@ function ShowsList({popularShows, topShows, onTheAirShows, favoriteShows, setPop
     }
     setFavoriteShows(favoriteShows);
   }
+
+  const startLeftScroll = (ref) => {
+    scrollInterval = setInterval(() => {
+      ref.current.scrollLeft -= 100;
+    }, 100);
+  }
+
+  const startRightScroll = (ref) => {
+    scrollInterval = setInterval(() => {
+      ref.current.scrollLeft += 100;
+    }, 100);
+  }
+
+  const endScroll = () => {
+    clearInterval(scrollInterval);
+  }
+
   return (
     <section>
       <h1 className="headingCol">Popular <FilterSelect name="popular" onFilter={handleOnFilter}/><hr/></h1>
-      <div className="showRow">
+      <div className="showRow" ref={popularListRef}>
+        <div className="arrow-left" onMouseOver={() => startLeftScroll(popularListRef)} onMouseLeave={endScroll}></div>
         {popularShows.map((element) => {
           return (
             <ShowItem key={`popular-${element.id}`} item={element} onFavorite={handleFavorite} favoriteIds={favoriteShows.map(x => x.id)}/>
           )
-        }) } 
+        })}
+        <div className="arrow-right" onMouseOver={() => startRightScroll(popularListRef)} onMouseLeave={endScroll}></div>
       </div>
 
       <h1 className="headingCol">Top Rated <FilterSelect name="top" onFilter={handleOnFilter}/> <hr/></h1>
-      <div className="showRow">
+      <div className="showRow" ref={topListRef}>
+        <div className="arrow-left" onMouseOver={() => startLeftScroll(topListRef)} onMouseLeave={endScroll}></div>
         {topShows.map((element) => {
           return (
             <ShowItem key={`top-${element.id}`}  item={element} onFavorite={handleFavorite} favoriteIds={favoriteShows.map(x => x.id)}/>
           )
-        }) }
+        })}
+        <div className="arrow-right" onMouseOver={() => startRightScroll(topListRef)} onMouseLeave={endScroll}></div>
       </div>
       <h1 className="headingCol">Trending Now <FilterSelect name="onTheAir" onFilter={handleOnFilter}/><hr/></h1>
-      <div className="showRow">
+      <div className="showRow" ref={onTheAirListRef}>
+        <div className="arrow-left" onMouseOver={() => startLeftScroll(onTheAirListRef)} onMouseLeave={endScroll}></div>
         {onTheAirShows.map((element) => {
           return (
             <ShowItem key={`onTheAir-${element.id}`}  item={element} onFavorite={handleFavorite} favoriteIds={favoriteShows.map(x => x.id)}/>
           )
-        }) }
+        })}
+        <div className="arrow-right" onMouseOver={() => startRightScroll(onTheAirListRef)} onMouseLeave={endScroll}></div>
       </div>  
       <h1 className="headingCol">Favorites <FilterSelect name="favorite" onFilter={handleOnFilter}/> <hr/></h1>
-      <div className="showRow">
+      <div className="showRow" ref={favoriteListRef}>
+        <div className="arrow-left" onMouseOver={() => startLeftScroll(favoriteListRef)} onMouseLeave={endScroll}></div>
         {favoriteShows.map((element) => {
           return (
             <ShowItem key={`favorites-${element.id}`} item={element} onFavorite={handleFavorite} favoriteIds={favoriteShows.map(x => x.id)}/>
           )
-        }) }
+        })}
+        <div className="arrow-right" onMouseOver={() => startRightScroll(favoriteListRef)} onMouseLeave={endScroll}></div>
       </div> 
     </section>
   )
