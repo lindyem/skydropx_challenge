@@ -1,5 +1,5 @@
 # TV Database 
-## SPA using Redux and Movie Database API.
+## SPA using Redux and Movie Database API. Sort by and favorite functionality.
 
 ## Technology Used:
 - HTML5, CSS3, Javascript, Redux, Movie Database API
